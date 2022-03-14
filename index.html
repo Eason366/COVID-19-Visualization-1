@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, 
+        initial-scale=1.0">
+        <title>Data Visualization</title>
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+
+        <!-- Title -->
+        <header>
+            <h1>Data Visualization</h1>
+            <div class="showTime"></div>
+            <script src="../js/time.js"></script>
+            <div class="updataTime"></div>
+        </header>
+        <!-- Main Body -->
+        <section class="mainBox">
+            <div class="column">
+                <div class="panel bar">
+                    <h2>Actual Case in All States</h2>
+                    <div class="chart" id="chart1"></div>
+                    <div class="panel-footer"></div>
+                </div>
+                <div class="panel line" >
+                    
+                    <h2>Current epidemic distribution trend</h2>
+                    <div class="chart" id="chart2"></div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+            <div class="column">
+                <!-- Number Model -->
+                <div class="no">
+                    <div class="no-hd">
+                        <ul>
+                            <li1 class="nowcase"></li1>
+                            <li2 class="nowdeaths"></li2>
+                        </ul>
+                    </div>
+                    <div class="no-bd">
+                        <ul>
+                            <li>Actual Case</li>
+                            <li>Actual Death</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Map Model -->
+                <div class="map">
+                    <div class="sphere"></div>
+                    <div class="sphere1"></div>
+                    <div class="sphere2"></div>
+                    <div class="chart" id="USA"></div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="panel" >
+                    <h2 id="StateSituation"></h2>
+                    <table>
+                        <tr>
+                          <td class="situation">State</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="countryState"></td>
+                        </tr>
+                        <tr>
+                          <td class="situation">caseDensity</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="caseDensity"></td>
+                        </tr>
+                        <tr>
+                          <td class="situation">Infection Rate</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="infectionRate"></td>
+                        </tr>
+                        <tr>
+                          <td class="situation">Infection Rate CI90</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="infectionRateCI90"></td>
+                        </tr>
+                        <tr>
+                          <td class="situation">ICU Capacity Ratio</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="icuCapacityRatio"></td>
+                        </tr>
+                        <tr>
+                          <td class="situation">Vaccinations Initiated Ratio</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="vaccinationsInitiatedRatio"></td>
+                        </tr>
+                        <tr>
+                          <td class="situation">vaccinations Completed Ratio</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="vaccinationsCompletedRatio"></td>
+                        </tr>
+                        <tr>
+                          <td class="situation">Vaccinations Additional Dose Ratio</td>
+                          <td>&nbsp;</td>
+                          <td class="rate" id="vaccinationsAdditionalDoseRatio"></td>
+                        </tr>
+                      </table>
+                    <div class="panel-footer"></div>
+                </div>
+                <div class="panel pie">
+                    <h2>Total Case</h2>
+                    <div class="chart" id="chart3"></div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+        </section>
+        <script src="js/flexible.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/echarts.js"></script>
+
+
+<script>
+    const key = "ec7f59a6f430456abc69af6559d64c7e";
+    $.getJSON("https://api.covidactnow.org/v2/country/US.json?apiKey="
+    +key,caseNumber =function(result){
+        var metrics = result.metrics;
+        var nowcase = result.actuals.cases;
+        var nowdeaths = result.actuals.deaths;
+        var updata = result.lastUpdatedDate;
+        document.querySelector(".nowcase").innerHTML = nowcase;
+        document.querySelector(".nowdeaths").innerHTML = nowdeaths;
+        document.querySelector(".updataTime").innerHTML = "Last Updated Date: "+updata;
+        document.getElementById('StateSituation').innerHTML = result.country+" Situation";
+        document.getElementById('countryState').innerHTML = result.country;
+        document.getElementById('caseDensity').innerHTML = metrics.caseDensity;
+        document.getElementById('infectionRate').innerHTML = metrics.infectionRate;
+        document.getElementById('infectionRateCI90').innerHTML = metrics.infectionRateCI90;
+        document.getElementById('icuCapacityRatio').innerHTML = metrics.icuCapacityRatio;
+        document.getElementById('vaccinationsInitiatedRatio').innerHTML = metrics.vaccinationsInitiatedRatio;
+        document.getElementById('vaccinationsCompletedRatio').innerHTML = metrics.vaccinationsCompletedRatio;
+        document.getElementById('vaccinationsAdditionalDoseRatio').innerHTML = metrics.vaccinationsAdditionalDoseRatio;
+    })
+</script>
+
+<script src="../js/chart1.js"></script>
+<script src="../js/chart2.js"></script>
+<script src="../js/chart3.js"></script>
+<script src="../js/USA.js"></script>
+    </body>
+</html> 
+
+
+
