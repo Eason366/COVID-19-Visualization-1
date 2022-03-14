@@ -65,7 +65,7 @@ header .updataTime {
   position: relative;
   height: 5rem;
   border: 1px solid rgba(25, 186, 139, 0.17);
-  background: url(../images/line\(1\).png);
+  background: url(../images/line.png);
   padding: 0 0.1875rem 0.5rem;
   margin-bottom: 0.1875rem;
 }
@@ -126,29 +126,6 @@ header .updataTime {
 .mainBox .panel .chart {
   height: 4.125rem;
   width: 100%;
-}
-.mainBox .panel table {
-  height: 4.125rem;
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 1.125rem, 1.125rem;
-  table-layout: fixed;
-}
-.mainBox .panel table tr .situation {
-  color: #2B91B7;
-  text-align: left;
-  font-size: 0.125rem;
-  font-weight: 400;
-  width: 50%;
-  word-wrap: break-word;
-}
-.mainBox .panel table tr .rate {
-  color: #2B91B7;
-  text-align: right;
-  font-size: 0.125rem;
-  font-weight: 400;
-  width: 50%;
-  word-wrap: break-word;
 }
 .no {
   background-color: rgba(101, 132, 226, 0.1);
