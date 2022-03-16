@@ -54,8 +54,10 @@ function LoadmyChart1() {
                     trigger: 'axis'
                 },
                 legend: {
-                    data: [{name:'New Case',textStyle:{color:"#fff"}}, 
-                    {name:'New Death',textStyle:{color:"#fff"}}]
+                    data: [
+                        { name: 'New Case', textStyle: { color: "#fff" } },
+                        { name: 'New Death', textStyle: { color: "#fff" } }
+                    ]
                 },
                 grid: {
                     left: '3%',
@@ -99,10 +101,11 @@ function LoadmyChart1() {
 
 // LoadmyChart2
 function LoadmyChart2() {
-    var cases = [];
-    var allStates = [];
     $.getJSON("https://api.covidactnow.org/v2/states.json?apiKey="
         + key, caseNumber = function (result) {
+            document.getElementById("ActualCase").innerHTML = "Actual Case in All States"
+            var cases = [];
+            var allStates = [];
             for (var i = 0; i < result.length; i++) {
                 cases.push(result[i].actuals.cases);
                 allStates.push(result[i].state)
@@ -128,7 +131,6 @@ function LoadmyChart2() {
                 xAxis: {
                     type: 'category',
                     data: allStates
-
                 },
                 yAxis: {
                     type: 'value'
@@ -488,7 +490,6 @@ function clickLoad(stateSelect) {
         + stateSelect
         + ".timeseries.json?apiKey="
         + key, caseNumber = function (result) {
-            console.log(result);
             // change myChart1
             document.getElementById("StateNew").innerHTML = result.state + " Distribution (Recent 40 Days)"
             var cases = [];
@@ -505,6 +506,10 @@ function clickLoad(stateSelect) {
             option1.series[0].data = cases;
             option1.series[1].data = deaths;
             myChart1.setOption(option1);
+
+
+
+
 
 
             // change myChart3
@@ -535,6 +540,31 @@ function clickLoad(stateSelect) {
         + stateSelect
         + ".json?apiKey="
         + key, caseNumber = function (result) {
+
+            // change myChart2
+            document.getElementById("ActualCase").innerHTML = "Actual Case in "+stateSelect;
+            var cases = [];
+            var allStates = [];
+            for (var i = 0; i < result.length; i++) {
+                cases.push(result[i].actuals.cases);
+                allStates.push(result[i].county)
+            }
+            var option2 = myChart2.getOption();
+            option2.series[0].data = cases;
+            option2.xAxis[0].data = allStates
+            option2.series[0].itemStyle.color = function (params) {
+                if (params.data > 200000) {
+                    return '#4169E1';
+                } else if (params.data <= 200000 && params.data > 100000) {
+                    return '#00BFFF';
+                } else {
+                    return '#ADD8E6';
+                }
+            }
+            myChart2.setOption(option2);
+
+
+            // change myChart4
             document.getElementById("countyTest").innerHTML = "All Counties in " + stateSelect;
             var County = [];
             for (var i = 0; i < result.length; i++) {
